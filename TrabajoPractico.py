@@ -39,7 +39,6 @@ def Crear_ListaDeDato(ListaDePersonas, Dato):
     
 def SepararPor (Lista, Dato):
     if Dato == "Edad":
-        NuevaLista = []
         Lista15 = []
         Lista17 = []
         Lista18 = []
@@ -50,10 +49,9 @@ def SepararPor (Lista, Dato):
                 Lista17 += [Persona]
             else:
                 Lista18 += [Persona]
-        return NuevaLista = [Lista15] + [Lista17] + [Lista18]
+        return [[Lista15] + [Lista17] + [Lista18]]
     
     elif Dato == "Sexo":
-        NuevaLista = []
         HombresHetero = []
         MujerHetero = []
         HombreHomo= []
@@ -75,7 +73,7 @@ def SepararPor (Lista, Dato):
             else:
                 MujerBi += [Persona]
 
-        return NuevaLista = [HombresHetero] + [MujerHetero] + [HombreHomo] + [MujerHomo] + [HombreBi] + [MujerBi]
+        return [[HombresHetero] + [MujerHetero] + [HombreHomo] + [MujerHomo] + [HombreBi] + [MujerBi]]
     
 def Descartados (Diccionario,ListaDeNombres, Tipo):
     ListaDeTipo = []
@@ -109,7 +107,7 @@ def Match (): #FUNCION PRINCIPAL
     Asexuales = Descartados(Diccionario_de_Personas,Lista_De_Nombres,"Asexuales")
     Candidatos = QuitarPersonas(Lista_De_Nombres,Menores_de_edad+Asexuales)
     #Parejas = Matching(Crear_Diccionario_de_Localidades(Diccionario,Candidatos),Crear_ListaDeDato(Lista_de_Personas))
-    """ArchivoNoparejas = open("solterones.txt","a")
+    """ArchivoNoparejas = open("SalidaNoParejas.txt","w")
     ArchivoNoparejas.write("Estas personas no formaron parejas por ser menores de 10 años")
     ArchivoNoparejas.writelines(Menores_de_edad)
     ArchivoNoparejas.write("Estas personas no formaron parejas por ser asexuales")
