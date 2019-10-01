@@ -23,6 +23,11 @@ def Crear_Diccionario_de_Localidades(Diccionario):
         DiccionarioLocalidades[Diccionario[Nombre][0]] += [(Nombre,[Diccionario[Nombre][1]],[Diccionario[Nombre][2]],[Diccionario[Nombre][3]])]
     return DiccionarioLocalidades
 
+def Escribir (Diccionario,ListaDeNombres):
+    Solterones = open("SalidasNoParejas.txt","w")
+    for Nombre in ListaDeNombres:
+        Solterones.write("{0}, {1}, {2}, {3}, {4} \n".format(Nombre,Diccionario[Nombre][1],Diccionario[Nombre][2],Diccionario[Nombre][3],Diccionario[Nombre][0]))
+    Solterones.close()
    
 def SepararPor (Lista, Dato):
     if Dato == "Edad":
@@ -91,6 +96,7 @@ def Match (): #FUNCION PRINCIPAL
     Diccionario_de_Personas = Crear_DiccionarioDePersonas(Lista_de_Personas)
     Menores_de_Edad = Descartados(Diccionario_de_Personas,"Menores")
     Asexuales = Descartados(Diccionario_de_Personas,"Asexuales")
+    Escribir(Diccionario_de_Personas,Menores_de_Edad+Asexuales)
     """ArchivoNoparejas = open("SalidaNoParejas.txt","w")
     ArchivoNoparejas.write("Estas personas no formaron parejas por ser menores de 10 años")
     ArchivoNoparejas.writelines(Menores_de_edad)
