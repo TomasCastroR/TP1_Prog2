@@ -5,12 +5,10 @@ def NormalizarString(Lista):
         NuevaLista += [x]
     return NuevaLista
 
-def QuitarPersonas(Lista_de_nombres,Lista_a_sacar):
-    Candidatos = []
-    for persona in Lista_de_nombres:
-        if persona not in Lista_a_sacar:
-            Candidatos += [persona]
-    return Candidatos
+def QuitarPersonas(Diccionario,Lista_a_sacar):
+    for Persona in Lista_a_sacar:
+        del Diccionario[Persona]
+    return Diccionario
 
 def Crear_DiccionarioDePersonas (lista):
     Listadedict= dict()
