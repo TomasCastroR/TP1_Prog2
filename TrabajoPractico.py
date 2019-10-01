@@ -88,7 +88,30 @@ def Descartados (Diccionario,ListaDeNombres, Tipo):
                 ListaDeTipo += [nombres]
         return ListaDeTipo
 
-#def Matching(Diccionario,Lista):
+def machearhetero (lista1,lista2,localidad):
+    while lista1!=[] and lista2!=[]:
+        escribirpareja(lista1[0],lista2[0],localidad)
+        lista1.remove(list1[0])
+        lista2.remove(lista2[0])
+    
+def machearhomos (lista, localidad):
+    while lista != [] and len(list)!= 1:
+        escribirpareja (lista[0],lista[1],localidad)
+        lista.remove(lista[0])
+        lista.remove(lista[1])
+
+def Matching(Diccionario):
+    for localidades in Diccionario.keys:
+        ListaPorEdades = SepararPor(Diccionario[Localidad],"Edad")
+        ListaPorEdades_Y_Sexo = []
+        for Edad in ListaPorEdades:
+            ListaPorEdades_Y_Sexo += [SepararPor(Edad,"Sexo")]
+        for listaEdad in ListaPorEdades_Y_Sexo:
+            machearhetero(listaEdad[0],listaEdad[1],localidad)
+            machearhomos(listaEdad[2])
+            machearhomos(listaEdad[3])
+
+
     #Rosario": [(blasito, 17, M, F),(castre,14, m, f)]
     # Tener en cuenta el caso de una localidad con una unica persona en ella
     
