@@ -40,11 +40,13 @@ def EscribirNoPareja (Archivo_a_Escribir,Diccionario,ListaDeNombres,Razon):
         Archivo_a_Escribir.write("Estas personas no formaron parejas por ser asexuales\n")
     elif Razon == "Solos":
         Archivo_a_Escribir.write("Estas personas no pudieron formar pareja en su localidad\n")
+    elif Razon == "Unicos":
+        Archivo_a_Escribir.write("Estas personas no pudieron formar parejapor ser las unicas en su localidad\n")
     for Nombre in ListaDeNombres:
-        Archivo_a_Escribir.write("{0}, {1}, {2}, {3}, {4} \n".format(Nombre,Diccionario[Nombre][1],Diccionario[Nombre][2],Diccionario[Nombre][3],Diccionario[Nombre][0]))
+        Archivo_a_Escribir.write("{0}, {1}, {2}, {3}, {4}\n".format(Nombre,Diccionario[Nombre][1],Diccionario[Nombre][2],Diccionario[Nombre][3],Diccionario[Nombre][0]))
 
 def EscribirParejas (Archivo,Persona1,Persona2,Localidad):
-    Archivo.write("{0}, {1}, {2}, {3} -- {4}, {5}, {6}, {7} -- {8}".format(Persona1[0],Persona1[1],Persona1[2],Persona1[3], Persona2[0],Persona2[1],Persona2[2],Persona2[3],Localidad))
+    Archivo.write("{0}, {1}, {2}, {3} -- {4}, {5}, {6}, {7} -- {8}\n".format(Persona1[0],Persona1[1],Persona1[2],Persona1[3], Persona2[0],Persona2[1],Persona2[2],Persona2[3],Localidad))
 
 
 """Recibe una lista de tupla y forma una lista de lista segun el Dato.
@@ -121,20 +123,25 @@ def MatchearHomosexuales (lista, localidad):
     ParejasFile.close()
 
 def Matching(Diccionario):
+    PersonasUnicas = []
     for Localidad in Diccionario.keys():
-        ListaPorEdades = SepararPor(Diccionario[Localidad],"Edad")
-        ListaPorEdades_Y_Sexo = []
-        for Edad in ListaPorEdades:
-            ListaPorEdades_Y_Sexo += [SepararPor(Edad,"Genero")]
-        for listaEdad in ListaPorEdades_Y_Sexo:
-            MatchearHeterosexuales(listaEdad[0],listaEdad[1],Localidad)
-            MatchearHomosexuales(listaEdad[2],Localidad)
-            MatchearHomosexuales(listaEdad[3],Localidad)
+        if len(Diccionario[Localidad]) == 1:
+            Persona = Diccionario[Localidad][0]
+            PersonasUnicas += [(Persona[0],Persona[1],Persona[2],Persona[3],Localidad)]
+        else:
+            ListaPorEdades = SepararPor(Diccionario[Localidad],"Edad")
+            ListaPorEdades_Y_Sexo = []
+            for Edad in ListaPorEdades:
+                ListaPorEdades_Y_Sexo += [SepararPor(Edad,"Genero")]
+            for listaEdad in ListaPorEdades_Y_Sexo:
+                MatchearHeterosexuales(listaEdad[0],listaEdad[1],Localidad)
+                MatchearHomosexuales(listaEdad[2],Localidad)
+                MatchearHomosexuales(listaEdad[3],Localidad)
 
 
  #FUNCION PRINCIPAL
 def Match ():
-    f = open("testeo.txt","r",encoding="latin1") #Archivo de entrada
+    f = open("ejemplo1.txt","r",encoding="latin1") #Archivo de entrada
     Lista_de_Personas = list(map(NormalizarString,(map(lambda x: x.split(","),f.readlines()))))
     f.close()
     Diccionario_de_Personas = Crear_DiccionarioDePersonas(Lista_de_Personas)
