@@ -148,14 +148,15 @@ def Matching(Diccionario):
                 Matchearbisexuales(ParejasFile,listaEdad[2],listaEdad[4],Localidad)
                 Matchearbisexuales(ParejasFile,listaEdad[3],listaEdad[5],Localidad)
                 Matchearbisexuales(ParejasFile,listaEdad[4],listaEdad[5],Localidad)
+                
     ParejasFile.close()
     return PersonasUnicas
                 
 #FUNCION PRINCIPAL
 def Match ():
-    f = open("ejemplo1.txt","r",encoding="latin1") #Archivo de entrada
-    Lista_de_Personas = list(map(NormalizarString,(map(lambda x: x.split(","),f.readlines()))))
-    f.close()
+    EntradaFile = open("ejemplo1.txt","r",encoding="latin1") #Archivo de entrada
+    Lista_de_Personas = list(map(NormalizarString,(map(lambda x: x.split(","),EntradaFile.readlines()))))
+    EntradaFile.close()
     Diccionario_de_Personas = Crear_DiccionarioDePersonas(Lista_de_Personas)
     Menores_de_Edad = Descartados(Diccionario_de_Personas,"Menores")
     Asexuales = Descartados(Diccionario_de_Personas,"Asexuales")
