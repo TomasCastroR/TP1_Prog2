@@ -111,39 +111,22 @@ NELLY SANDI, 84, F, N, TIBAS
 EMERITA CORDERO, 68, F, N, PURISCAL
 JOSE JOAQUIN RODRIGUEZ, 20, M, N, POCOCI
 MARIA ISABEL RUILOVA, 77, F, N, CENTRAL
-Esta persona es la unica en su localidad
-VIDAL AZOFEIFA, 16, M. M -- POAS
-Esta persona es la unica en su localidad
-ELSA GODINEZ, 67, F. M -- ATENAS
-Esta persona es la unica en su localidad
-ALBERTO LOBO, 82, M. F -- SAN RAFAEL
-Esta persona es la unica en su localidad
-JOSEFINA GOMEZ, 43, F. A -- GRECIA
-Esta persona es la unica en su localidad
-EVANGELINA DEL SOCORRO ALFARO, 19, F. M -- OSA
-Esta persona es la unica en su localidad
-JOSE CASCANTE, 88, M. M -- TURRUBARES
-Esta persona es la unica en su localidad
-ORLANDO ORTIZ, 45, M. F -- BELEN
-Esta persona es la unica en su localidad
-LUZ JIMENEZ, 41, F. M -- OROTINA
-Esta persona es la unica en su localidad
-RUBEN FONSECA, 67, M. F -- SANTA BARBARA
-Esta persona es la unica en su localidad
-JOSE ANTONIO CERDAS, 43, M. A -- MATINA
-Esta persona es la unica en su localidad
-GUILLERMINA JIMENEZ, 22, F. A -- GARABITO
-Esta persona es la unica en su localidad
-FLORA DEL CARMEN SABORIO, 35, F. F -- ESTADOS UNIDOS
-Esta persona es la unica en su localidad
-FELIPE VINICIO MORA, 58, M. M -- VALVERDE VEGA
-Esta persona es la unica en su localidad
-JOSE MARIA HERRERA, 52, M. A -- HOJANCHA
-Esta persona es la unica en su localidad
-FILIBERTO MORA, 36, M. M -- QUEPOS
-Esta persona es la unica en su localidad
-MIRIAM SANCHEZ, 28, F. A -- SAN RAMON
-Esta persona es la unica en su localidad
-JAIME FERNANDEZ, 88, M. A -- BARVA
-Esta persona es la unica en su localidad
-MARTA QUIROS, 63, F. A -- OREAMUNO
+Estas personas no pudieron formar pareja por ser unicos en su localidad
+VIDAL AZOFEIFA, 16, M, M, POAS
+ELSA GODINEZ, 67, F, M, ATENAS
+ALBERTO LOBO, 82, M, F, SAN RAFAEL
+JOSEFINA GOMEZ, 43, F, A, GRECIA
+EVANGELINA DEL SOCORRO ALFARO, 19, F, M, OSA
+JOSE CASCANTE, 88, M, M, TURRUBARES
+ORLANDO ORTIZ, 45, M, F, BELEN
+LUZ JIMENEZ, 41, F, M, OROTINA
+RUBEN FONSECA, 67, M, F, SANTA BARBARA
+JOSE ANTONIO CERDAS, 43, M, A, MATINA
+GUILLERMINA JIMENEZ, 22, F, A, GARABITO
+FLORA DEL CARMEN SABORIO, 35, F, F, ESTADOS UNIDOS
+FELIPE VINICIO MORA, 58, M, M, VALVERDE VEGA
+JOSE MARIA HERRERA, 52, M, A, HOJANCHA
+FILIBERTO MORA, 36, M, M, QUEPOS
+MIRIAM SANCHEZ, 28, F, A, SAN RAMON
+JAIME FERNANDEZ, 88, M, A, BARVA
+MARTA QUIROS, 63, F, A, OREAMUNO
