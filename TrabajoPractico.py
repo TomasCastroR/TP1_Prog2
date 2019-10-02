@@ -41,7 +41,7 @@ def EscribirNoPareja (Archivo_a_Escribir,Diccionario,ListaDeNombres,Razon):
     elif Razon == "Solos":
         Archivo_a_Escribir.write("Estas personas no pudieron formar pareja en su localidad\n")
     elif Razon == "Unicos":
-        Archivo_a_Escribir.write("Estas personas no pudieron formar pareja por ser unicos en su localidad\n")
+        Archivo_a_Escribir.write("Estas personas no pudieron formar pareja por ser las unicas en su localidad\n")
     for Nombre in ListaDeNombres:
         Archivo_a_Escribir.write("{0}, {1}, {2}, {3}, {4}\n".format(Nombre,Diccionario[Nombre][1],Diccionario[Nombre][2],Diccionario[Nombre][3],Diccionario[Nombre][0]))
 
