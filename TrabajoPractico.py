@@ -10,7 +10,8 @@ def NormalizarString(Lista):
     Devuelve el diccionario sin esos elementos"""
 def EliminarDelDiccionario(Diccionario,Lista_a_sacar):
     for Persona in Lista_a_sacar:
-        del Diccionario[Persona]
+        if Persona in Diccionario.keys():
+            del Diccionario[Persona]
     return Diccionario
 """Toma una lista de lista de la forma [Nombre,Apellido,Localidad,Edad,Genero,Interes] y crea un diccionario
     donde las keys son Nombre y Apellido y los valores asociados son tuplas de la forma (Localidad, Edad, Genero, Interes)
