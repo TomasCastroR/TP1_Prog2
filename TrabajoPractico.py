@@ -107,7 +107,7 @@ def Descartados (Diccionario,Condicion):
         return ListaDeTipo
 
 def MatchearHeterosexuales (lista1,lista2,localidad):
-    ParejasFile = open("SalidaParejas.txt","a")
+    ParejasFile = open("SalidaParejas.txt","w")
     while lista1!=[] and lista2!=[]:
         EscribirParejas(ParejasFile,lista1[0],lista2[0],localidad)
         lista1.remove(lista1[0])
@@ -115,11 +115,18 @@ def MatchearHeterosexuales (lista1,lista2,localidad):
     ParejasFile.close()
 
 def MatchearHomosexuales (lista, localidad):
-    ParejasFile = open("SalidaParejas.txt","a")
+    ParejasFile = open("SalidaParejas.txt","w")
     while lista != [] and len(lista)!= 1:
         EscribirParejas (ParejasFile,lista[0],lista[1],localidad)
         lista.remove(lista[0])
         lista.remove(lista[0])
+    ParejasFile.close()
+
+def Matchearbisexuales (lista, lista2, localidad):
+    while lista !=[] and lista2 !=[]:
+        EscribirParejas (ParejasFile, lista[0],lista2[0], localidad)
+        lista.remove(lista[0])
+        lista2.remove(lista2[0])
     ParejasFile.close()
 
 def Matching(Diccionario):
@@ -127,7 +134,7 @@ def Matching(Diccionario):
     for Localidad in Diccionario.keys():
         if len(Diccionario[Localidad]) == 1:
             Persona = Diccionario[Localidad][0]
-            PersonasUnicas += [Persona[0]]
+            PersonasUnicas += [(Persona[0],Persona[1],Persona[2],Persona[3],Localidad)]
         else:
             ListaPorEdades = SepararPor(Diccionario[Localidad],"Edad")
             ListaPorEdades_Y_Sexo = []
@@ -137,9 +144,14 @@ def Matching(Diccionario):
                 MatchearHeterosexuales(listaEdad[0],listaEdad[1],Localidad)
                 MatchearHomosexuales(listaEdad[2],Localidad)
                 MatchearHomosexuales(listaEdad[3],Localidad)
-    return PersonasUnicas
+                Matchearbisexuales(listaEdad[0],listaEdad[5],Localidad)
+                Matchearbisexuales(listaEdad[1],listaEdad[4],Localidad)
+                Matchearbisexuales(listaEdad[2],listaEdad[4],Localidad)
+                Matchearbisexuales(listaEdad[3],listaEdad[5],Localidad)
+                Matchearbisexuales(listaEdad[4],listaEdad[5],Localidad)
 
- #FUNCION PRINCIPAL
+                
+#FUNCION PRINCIPAL
 def Match ():
     f = open("ejemplo1.txt","r",encoding="latin1") #Archivo de entrada
     Lista_de_Personas = list(map(NormalizarString,(map(lambda x: x.split(","),f.readlines()))))
@@ -150,9 +162,9 @@ def Match ():
     NoParejasFile = open("SalidaNoParejas.txt","w")
     EscribirNoPareja(NoParejasFile,Diccionario_de_Personas,Menores_de_Edad,"Menores")
     EscribirNoPareja(NoParejasFile,Diccionario_de_Personas,Asexuales,"Asexuales")
+    NoParejasFile.close()
     Diccionario_de_Personas = EliminarDelDiccionario(Diccionario_de_Personas,Menores_de_Edad+Asexuales)
     DiccionarioPorLocalidades = Crear_Diccionario_de_Localidades(Diccionario_de_Personas)
-    Unicos = Matching(DiccionarioPorLocalidades)
-    EscribirNoPareja(NoParejasFile,Diccionario_de_Personas,Unicos,"Unicos")
-    NoParejasFile.close()
+    Matching(DiccionarioPorLocalidades)
+
 Match()
