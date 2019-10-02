@@ -31,8 +31,8 @@ def Crear_Diccionario_de_Localidades(Diccionario):
         else:
             DiccionarioLocalidades[Diccionario[Nombre][0]] = [(Nombre,Diccionario[Nombre][1],Diccionario[Nombre][2],Diccionario[Nombre][3])]
     return DiccionarioLocalidades
-"""Toma un diccionario, una lista de nombre que son keys del diccionario y una razon de escritura.
-    Escribe sobre el archivo SalidaNoPareja.txt todos los datos de las persona de la lista"""
+"""Toma un diccionario, un archivo, una lista de nombre que son keys del diccionario y una razon de escritura.
+    Escribe sobre el archivo todos los datos de las persona de la lista"""
 def EscribirNoPareja (Archivo_a_Escribir,Diccionario,ListaDeNombres,Razon):
     if Razon == "Menores":
         Archivo_a_Escribir.write("Estas personas no formaron parejas por ser menores de 10 años\n")
@@ -117,18 +117,15 @@ def MatchearHomosexuales (lista, localidad):
     while lista != [] and len(lista)!= 1:
         EscribirParejas (ParejasFile,lista[0],lista[1],localidad)
         lista.remove(lista[0])
-        lista.remove(lista[1])
+        lista.remove(lista[0])
     ParejasFile.close()
 
 def Matching(Diccionario):
     for Localidad in Diccionario.keys():
         ListaPorEdades = SepararPor(Diccionario[Localidad],"Edad")
-        print(Localidad)
-        print(ListaPorEdades)
         ListaPorEdades_Y_Sexo = []
         for Edad in ListaPorEdades:
             ListaPorEdades_Y_Sexo += [SepararPor(Edad,"Genero")]
-        print(ListaPorEdades_Y_Sexo)
         for listaEdad in ListaPorEdades_Y_Sexo:
             MatchearHeterosexuales(listaEdad[0],listaEdad[1],Localidad)
             MatchearHomosexuales(listaEdad[2],Localidad)
