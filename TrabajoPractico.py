@@ -147,7 +147,7 @@ def Matching(Diccionario):
                 Matchearbisexuales(ParejasFile,listaEdad[1],listaEdad[4],Localidad)
                 Matchearbisexuales(ParejasFile,listaEdad[2],listaEdad[4],Localidad)
                 Matchearbisexuales(ParejasFile,listaEdad[3],listaEdad[5],Localidad)
-                Matchearbisexuales(ParejasFile,listaEdad[4],listaEdad[5],Localidad)
+                MatchearHomosexuales(ParejasFile,listaEdad[4]+listaEdad[5],Localidad)
                 
     ParejasFile.close()
     return PersonasUnicas
