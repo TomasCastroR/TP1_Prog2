@@ -39,7 +39,7 @@ def EscribirNoPareja (Archivo_a_Escribir,Diccionario,ListaDeNombres,Razon):
         Archivo_a_Escribir.write("Estas personas no formaron parejas por ser menores de 10 años\n")
     elif Razon == "Asexuales":
         Archivo_a_Escribir.write("Estas personas no formaron parejas por ser asexuales\n")
-    elif Razon == "Solos":
+    elif Razon == "Solteros":
         Archivo_a_Escribir.write("Estas personas no pudieron formar pareja en su localidad\n")
     elif Razon == "Unicos":
         Archivo_a_Escribir.write("Estas personas no pudieron formar pareja por ser las unicas en su localidad\n")
@@ -114,22 +114,14 @@ def MatchearHeterosexuales (Archivo,lista1,lista2,localidad):
         lista2.remove(lista2[0])
 
 def MatchearHomosexuales (Archivo,lista, localidad):
-    
     while lista != [] and len(lista)!= 1:
         EscribirParejas (Archivo,lista[0],lista[1],localidad)
         lista.remove(lista[0])
         lista.remove(lista[0])
 
-
-def Matchearbisexuales (Archivo,lista, lista2, localidad):
-    while lista !=[] and lista2 !=[]:
-        EscribirParejas (Archivo, lista[0],lista2[0], localidad)
-        lista.remove(lista[0])
-        lista2.remove(lista2[0])
-
-
 def Matching(Diccionario):
     PersonasUnicas = []
+    PersonasSolteras = []
     ParejasFile = open("SalidaParejas.txt","w")
     for Localidad in Diccionario.keys():
         if len(Diccionario[Localidad]) == 1:
@@ -144,14 +136,17 @@ def Matching(Diccionario):
                 MatchearHeterosexuales(ParejasFile,listaEdad[0],listaEdad[1],Localidad)
                 MatchearHomosexuales(ParejasFile,listaEdad[2],Localidad)
                 MatchearHomosexuales(ParejasFile,listaEdad[3],Localidad)
-                Matchearbisexuales(ParejasFile,listaEdad[0],listaEdad[5],Localidad)
-                Matchearbisexuales(ParejasFile,listaEdad[1],listaEdad[4],Localidad)
-                Matchearbisexuales(ParejasFile,listaEdad[2],listaEdad[4],Localidad)
-                Matchearbisexuales(ParejasFile,listaEdad[3],listaEdad[5],Localidad)
-                MatchearHomosexuales(ParejasFile,listaEdad[4]+listaEdad[5],Localidad)
-                
+                MatchearHeterosexuales(ParejasFile,listaEdad[0],listaEdad[5],Localidad)
+                MatchearHeterosexuales(ParejasFile,listaEdad[1],listaEdad[4],Localidad)
+                MatchearHeterosexuales(ParejasFile,listaEdad[2],listaEdad[4],Localidad)
+                MatchearHeterosexuales(ParejasFile,listaEdad[3],listaEdad[5],Localidad)
+                BisexualesDescartados = listaEdad[4]+listaEdad[5]
+                MatchearHomosexuales(ParejasFile,BisexualesDescartados,Localidad)
+                for Persona in listaEdad[0] + listaEdad[1] + listaEdad[2] + listaEdad[3] + BisexualesDescartados:
+                    PersonasSolteras += [Persona[0]]
+                    
     ParejasFile.close()
-    return PersonasUnicas
+    return [PersonasUnicas]+ [PersonasSolteras]
                 
 #FUNCION PRINCIPAL
 def Match ():
@@ -167,7 +162,8 @@ def Match ():
     Diccionario_de_Personas = EliminarDelDiccionario(Diccionario_de_Personas,Menores_de_Edad+Asexuales)
     DiccionarioPorLocalidades = Crear_Diccionario_de_Localidades(Diccionario_de_Personas)
     Unicos = Matching(DiccionarioPorLocalidades)
-    EscribirNoPareja(NoParejasFile,Diccionario_de_Personas,Unicos,"Unicos")
+    EscribirNoPareja(NoParejasFile,Diccionario_de_Personas,Unicos[0],"Unicos")
+    EscribirNoPareja(NoParejasFile,Diccionario_de_Personas,Unicos[1],"Solteros")
     NoParejasFile.close()
 
 Match()
