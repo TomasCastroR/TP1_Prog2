@@ -1,44 +1,29 @@
 #   Esta funcion quita los espacios y los enter de los datos (strings) individuales de cada persona.
 #   Devuelve la lista con los strings sin los espacios necesarios
-def NormalizarString(Lista):
+def Pasar_a_Tupla(Lista):
     NuevaLista = []
-    for x in Lista:
-        x = x.strip()
-        NuevaLista += [x]
+    for [Nombre,Apellido,Localidad,Edad,Genero,Interes] in Lista:
+        NuevaLista += [(Nombre.strip()+" "+Apellido.strip(),Localidad.strip(),Edad.strip(),Genero.strip(),Interes.strip())]
     return NuevaLista
 """ Tomas un diccionario y una lista que sus elementos son keys del diccionario, elimina esos elementos del diccionario.
     Devuelve el diccionario sin esos elementos"""
-def EliminarDelDiccionario(Diccionario,Lista_a_sacar):
+def EliminarDeLaLista(ListaPrincipal,Lista_a_sacar):
     for Persona in Lista_a_sacar:
-            del Diccionario[Persona]
-    return Diccionario
-"""Toma una lista de lista de la forma [Nombre,Apellido,Localidad,Edad,Genero,Interes] y crea un diccionario
-    donde las keys son Nombre y Apellido y los valores asociados son tuplas de la forma (Localidad, Edad, Genero, Interes)
-    Retorna el diccionario"""
-def Crear_DiccionarioDePersonas (lista):
-    NuevoDiccionario = dict()
-    identificador = 1
-    for [Nombre,Apellido,Localidad,Edad,Genero,Interes] in lista:
-        if Nombre + " " + Apellido in NuevoDiccionario.keys():
-            NuevoDiccionario[Nombre + " " + Apellido + str(indentificador)] = (Localidad, Edad, Genero, Interes)
-            identificador += 1
-        else:
-            NuevoDiccionario[Nombre + " " + Apellido] = (Localidad, Edad, Genero, Interes)
-    return NuevoDiccionario
+            ListaPrincipal.remove(Persona)
 
 """Toma un diccionario existentex crea otro diccionario donde las keys son Localidades y sus valores una lista de tuplas de la forma 
     (Nombre, Edad, Genero, Interes)"""
-def Crear_Diccionario_de_Localidades(Diccionario):
+def Crear_Diccionario_de_Localidades(ListaDePersonas):
     DiccionarioLocalidades = dict()
-    for Nombre in Diccionario.keys():
-        if Diccionario[Nombre][0] in DiccionarioLocalidades.keys():
-            DiccionarioLocalidades[Diccionario[Nombre][0]] += [(Nombre,Diccionario[Nombre][1],Diccionario[Nombre][2],Diccionario[Nombre][3])]
+    for (NombreYApellido,Localidad,Edad,Genero,Interes) in ListaDePersonas:
+        if Localidad in DiccionarioLocalidades.keys():
+            DiccionarioLocalidades[Localidad] += [(NombreYApellido,Edad,Genero,Interes)]
         else:
-            DiccionarioLocalidades[Diccionario[Nombre][0]] = [(Nombre,Diccionario[Nombre][1],Diccionario[Nombre][2],Diccionario[Nombre][3])]
+            DiccionarioLocalidades[Localidad] = [(NombreYApellido,Edad,Genero,Interes)]
     return DiccionarioLocalidades
 """Toma un diccionario, un archivo, una lista de nombre que son keys del diccionario y una razon de escritura.
     Escribe sobre el archivo todos los datos de las persona de la lista"""
-def EscribirNoPareja (Archivo_a_Escribir,Diccionario,ListaDeNombres,Razon):
+def EscribirNoPareja (Archivo_a_Escribir,ListaDePersonas,Razon):
     if Razon == "Menores":
         Archivo_a_Escribir.write("Estas personas no formaron parejas por ser menores de 10 años\n")
     elif Razon == "Asexuales":
@@ -47,12 +32,11 @@ def EscribirNoPareja (Archivo_a_Escribir,Diccionario,ListaDeNombres,Razon):
         Archivo_a_Escribir.write("Estas personas no pudieron formar pareja en su localidad\n")
     elif Razon == "Unicos":
         Archivo_a_Escribir.write("Estas personas no pudieron formar pareja por ser las unicas en su localidad\n")
-    for Nombre in ListaDeNombres:
-        Archivo_a_Escribir.write("{0}, {1}, {2}, {3}, {4}\n".format(Nombre,Diccionario[Nombre][1],Diccionario[Nombre][2],Diccionario[Nombre][3],Diccionario[Nombre][0]))
+    for (NombreYApellido,Localidad,Edad,Genero,Interes) in ListaDePersonas:
+        Archivo_a_Escribir.write("{0}, {1}, {2}, {3}, {4}\n".format(NombreYApellido,Edad,Genero,Interes,Localidad))
 
 """Recibe el archivo a escribir, dos personas que seran la pareja y su localidad.
-    Escribe sobre el archivo la siguiente linea:
-    Nombre, Edad, Genero, Interes -- Nombre, Edad, Genero, Interes -- Localidad""""
+    Escribe sobre el archivo la siguiente linea:"""
 def EscribirParejas (Archivo,Persona1,Persona2,Localidad):
     Archivo.write("{0}, {1}, {2}, {3} -- {4}, {5}, {6}, {7} -- {8}\n".format(Persona1[0],Persona1[1],Persona1[2],Persona1[3], Persona2[0],Persona2[1],Persona2[2],Persona2[3],Localidad))
 
@@ -101,17 +85,17 @@ def SepararPor (Lista, Dato):
         return [HombresHetero] + [MujeresHetero] + [HombresHomo] + [MujeresHomo] + [HombresBi] + [MujeresBi]
 
 """Recibe un diccionario y una condicion de descarte, devuelve la lista de nombres de personas que cumplan con la condicion"""    
-def Descartados (Diccionario,Condicion):
+def Descartados (ListaDePersonas,Condicion):
     ListaDeTipo = []
     if Condicion == "Menores":
-        for Nombre in Diccionario.keys():      
-            if int(Diccionario[Nombre][1]) <= 10:
-                ListaDeTipo += [Nombre]
+        for (NombreYApellido,Localidad,Edad,Genero,Interes) in ListaDePersonas:      
+            if int(Edad) <= 10:
+                ListaDeTipo += [(NombreYApellido,Localidad,Edad,Genero,Interes)]
         return ListaDeTipo
     elif Condicion == "Asexuales":
-        for nombres in Diccionario.keys():
-            if Diccionario[nombres][3]== "N":
-                ListaDeTipo += [nombres]
+        for (NombreYApellido,Localidad,Edad,Genero,Interes) in ListaDePersonas:
+            if Interes == "N":
+                ListaDeTipo += [(NombreYApellido,Localidad,Edad,Genero,Interes)]
         return ListaDeTipo
 """Recibe un Archivo, dos listas de Genero e Interes y la localidad donde se encuentra.
     Empareja los primeros elementos de cada lista escribiendolos sobre el archivo y luego
@@ -141,7 +125,7 @@ def Matching(Diccionario):
     for Localidad in Diccionario.keys():
         if len(Diccionario[Localidad]) == 1:
             Persona = Diccionario[Localidad][0]
-            PersonasUnicas += [Persona[0]]
+            PersonasUnicas += [(Persona[0],Localidad,Persona[1],Persona[2],Persona[3])]
         else:
             ListaPorEdades = SepararPor(Diccionario[Localidad],"Edad")
             ListaPorEdades_Y_Sexo = []
@@ -158,7 +142,7 @@ def Matching(Diccionario):
                 BisexualesRestantes = listaEdad[4]+listaEdad[5] #Bisexuales que todavia no formaron pareja
                 MatchearHomosexuales(ParejasFile,BisexualesRestantes,Localidad)#Match personas bisexuales
                 for Persona in listaEdad[0] + listaEdad[1] + listaEdad[2] + listaEdad[3] + BisexualesRestantes:
-                    PersonasSolteras += [Persona[0]]
+                    PersonasSolteras += [(Persona[0],Localidad,Persona[1],Persona[2],Persona[3])]
                    
     ParejasFile.close()
     return [PersonasUnicas]+ [PersonasSolteras]
@@ -166,23 +150,19 @@ def Matching(Diccionario):
 #FUNCION PRINCIPAL
 def Match ():
     EntradaFile = open("ejemplo2.txt","r",encoding="latin1") #Archivo de entrada
-    Lista_de_Personas = list(map(NormalizarString,(map(lambda x: x.split(","),EntradaFile.readlines()))))
+    Lista_de_Personas = Pasar_a_Tupla(list(map(lambda x: x.split(","),EntradaFile.readlines())))
     EntradaFile.close()
     NoParejasFile = open("SalidaNoParejas.txt","w")
-    Diccionario_de_Personas = Crear_DiccionarioDePersonas(Lista_de_Personas)
-    print(len(Diccionario_de_Personas))
-    Menores_de_Edad = Descartados(Diccionario_de_Personas,"Menores")
-    print(len(Menores_de_Edad))
-    EscribirNoPareja(NoParejasFile,Diccionario_de_Personas,Menores_de_Edad,"Menores")
-    Diccionario_de_Personas = EliminarDelDiccionario(Diccionario_de_Personas,Menores_de_Edad)
-    print(len(Diccionario_de_Personas))
-    Asexuales = Descartados(Diccionario_de_Personas,"Asexuales")
-    EscribirNoPareja(NoParejasFile,Diccionario_de_Personas,Asexuales,"Asexuales")
-    Diccionario_de_Personas = EliminarDelDiccionario(Diccionario_de_Personas,Asexuales)
-    DiccionarioPorLocalidades = Crear_Diccionario_de_Localidades(Diccionario_de_Personas)
-    Unicos = Matching(DiccionarioPorLocalidades)
-    EscribirNoPareja(NoParejasFile,Diccionario_de_Personas,Unicos[0],"Unicos")
-    EscribirNoPareja(NoParejasFile,Diccionario_de_Personas,Unicos[1],"Solteros")
+    Menores_de_Edad = Descartados(Lista_de_Personas,"Menores")
+    EscribirNoPareja(NoParejasFile,Menores_de_Edad,"Menores")
+    EliminarDeLaLista(Lista_de_Personas,Menores_de_Edad)
+    Asexuales = Descartados(Lista_de_Personas,"Asexuales")
+    EscribirNoPareja(NoParejasFile,Asexuales,"Asexuales")
+    EliminarDeLaLista(Lista_de_Personas,Asexuales)
+    DiccionarioPorLocalidades = Crear_Diccionario_de_Localidades(Lista_de_Personas)
+    NoParejas = Matching(DiccionarioPorLocalidades)
+    EscribirNoPareja(NoParejasFile,NoParejas[0],"Unicos")
+    EscribirNoPareja(NoParejasFile,NoParejas[1],"Solteros")
     NoParejasFile.close()
 
 Match()
