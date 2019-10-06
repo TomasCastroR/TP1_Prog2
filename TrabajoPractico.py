@@ -87,7 +87,7 @@ def SepararPor (Lista, Dato):
                 MujeresHomo += [Persona]
             elif Persona[2] == "M" and Persona[3] == "A":
                 HombresBi += [Persona]
-            else:
+            elif Persona[2] == "F" and Persona[3] == "A":
                 MujeresBi += [Persona]
         return [HombresHetero] + [MujeresHetero] + [HombresHomo] + [MujeresHomo] + [HombresBi] + [MujeresBi]
 
