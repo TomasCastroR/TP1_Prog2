@@ -2,7 +2,7 @@
     A cada persona y sus datos las representamos a traves de una quintupla del siguiente modo:
     (NombreYApellido, Localidad, Edad, Genero, Interes) todos los datos son strings"""
 
-""" Pasar_a_tupla: Lista(Lista) --> Lista(Tuplas)
+""" Pasar_a_tupla: Lista(Lista(Strings)) --> Lista(Tuplas)
     Recibe una lista de listas de strings, a cada lista de la lista la pasa a una tupla con sus strings
     sin los espacios o caracteres inncesarios"""
 def Pasar_a_Tupla(Lista):
@@ -11,7 +11,7 @@ def Pasar_a_Tupla(Lista):
         NuevaLista += [(Nombre.strip()+" "+Apellido.strip(),Localidad.strip(),Edad.strip(),Genero.strip(),Interes.strip())]
     return NuevaLista
 """ Toma una lista y una lista subconjunto de la primera, elimina de la primer lista todos los elementos de la segunda
-    "difererencia simetrica de conjuntos" """
+    "difererencia de conjuntos" """
 def EliminarDeLaLista(ListaPrincipal,Lista_a_sacar):
     for Persona in Lista_a_sacar:
             ListaPrincipal.remove(Persona)
