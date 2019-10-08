@@ -1,6 +1,7 @@
 from TrabajoPractico import *
 
-
+""" El archivo de ejemplos tiene un ejemplo por linea, y tiene que estar expresado en forma de una lista de listas, que cada elemento sea un string
+    El archivo de resultados tiene un resultado por linea, y tiene que estar expresado en forma de una lista de quintuplas de strings """
 def test_Pasar_a_Tupla ():
     EjemplosFile = open("Pasar_a_TuplasEjemplo.txt","r")
     ResultadosFile = open("Pasar_a_TuplasResultado.txt","r")
@@ -17,7 +18,9 @@ def test_Pasar_a_Tupla ():
     assert Pasar_a_Tupla(listaejemplo1) == listaresultado1
     assert Pasar_a_Tupla(listaejemplo2) == listaresultado2
     assert Pasar_a_Tupla(listaejemplo3) == listaresultado3
-
+"""El archivo de ejemplos tiene un ejemplo por linea, y tiene que estar expresado en forma de una lista de quintuplas de strings
+   El archivo de resultados tiene un resultado por linea, y tiene que estar expresado en forma de diccionario donde cada key es una localidad y su valor
+   asociado es una lista de cuatruplas"""
 def test_Crear_Diccionario_de_Localidades ():
     EjemplosFile = open("Crear_Diccionario_de_LocalidadesEjemplos.txt","r")
     ResultadosFile = open("Crear_Diccionario_de_LocalidadesResultados.txt","r")
@@ -31,7 +34,9 @@ def test_Crear_Diccionario_de_Localidades ():
     DiccionarioResultado2 = eval(LineasResultados[1])
     assert Crear_Diccionario_de_Localidades(ListaTuplaEjemplo1) == DiccionarioResultado1
     assert Crear_Diccionario_de_Localidades(ListaTuplaEjemplo2) == DiccionarioResultado2
-
+"""El archivo de ejemplos tiene un ejemplo por linea, y tiene que estar expresado en forma de lista de cuatruplas
+   El archivo de resultados tiene un resultado por linea, dependiendo del segundo argumento que puede ser "Edad" o "Genero" el resultado debe estar
+   """
 def test_SepararPor ():
     EjemplosFile = open("SepararPorEjemplos.txt","r")
     ResultadosFile = open("SepararPorResultados.txt","r")
