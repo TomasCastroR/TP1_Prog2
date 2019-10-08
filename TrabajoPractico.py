@@ -168,7 +168,7 @@ def Match ():
     EscribirNoPareja(NoParejasFile,Asexuales,"Asexuales")
     EliminarDeLaLista(Lista_de_Personas,Asexuales)
     DiccionarioPorLocalidades = Crear_Diccionario_de_Localidades(Lista_de_Personas)
-    NoParejas = Matching(DiccionarioPorLocalidades)
+    NoParejas = Matching(DiccionarioPorLocalidades) 
     EscribirNoPareja(NoParejasFile,NoParejas[0],"Unicos")
     EscribirNoPareja(NoParejasFile,NoParejas[1],"Solteros")
     NoParejasFile.close()

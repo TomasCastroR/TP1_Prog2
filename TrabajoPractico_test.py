@@ -2,47 +2,83 @@ from TrabajoPractico import *
 
 
 def test_Pasar_a_Tupla ():
-    listaejemplo1=[['JOSE', ' DELGADO', ' SANTA ANA', '  52', ' M', ' A\n'], ['CARMEN', ' CORRALES', ' GOICOECHEA', '  32', ' F', ' M\n']]
-    listaejemplo2=[['RAFAEL', ' AGUERO', ' CENTRAL', '  72', ' M', ' F\n'], ['MARTA', ' VILLALTA', ' GOICOECHEA', '  71', ' F', ' F\n']]
-    listaejemplo3=[['MANUEL', ' DELGADO', ' PURISCAL', '  66', ' M', ' N\n'], ['MARIA', ' SALAS', ' ATENAS', '  42', ' F', ' N\n'], ['ISABEL', ' VEGA', ' GOICOECHEA', '  73', ' F', ' N']]
-    listaresultado1=[('JOSE DELGADO', 'SANTA ANA', '52', 'M', 'A'), ('CARMEN CORRALES', 'GOICOECHEA', '32', 'F', 'M')]
-    listaresultado2=[('RAFAEL AGUERO', 'CENTRAL', '72', 'M', 'F'), ('MARTA VILLALTA', 'GOICOECHEA', '71', 'F', 'F')]
-    listaresultado3=[('MANUEL DELGADO', 'PURISCAL', '66', 'M', 'N'), ('MARIA SALAS', 'ATENAS', '42', 'F', 'N'), ('ISABEL VEGA', 'GOICOECHEA', '73', 'F', 'N')]
+    EjemplosFile = open("Pasar_a_TuplasEjemplo.txt","r")
+    ResultadosFile = open("Pasar_a_TuplasResultado.txt","r")
+    LineasEjemplo = EjemplosFile.readlines()
+    LineasResultados = ResultadosFile.readlines()
+    EjemplosFile.close()
+    Resultados.close()
+    listaejemplo1 = eval(LineasEjemplo[0])
+    listaejemplo2 = eval(LineasEjemplo[1])
+    listaejemplo3 = eval(LineasEjemplo[2])
+    listaresultado1 = eval(LineasResultados[0])
+    listaresultado2 = eval(LineasResultados[1])
+    listaresultado3 = eval(LineasResultados[2])
     assert Pasar_a_Tupla(listaejemplo1) == listaresultado1
     assert Pasar_a_Tupla(listaejemplo2) == listaresultado2
     assert Pasar_a_Tupla(listaejemplo3) == listaresultado3
 
 def test_Crear_Diccionario_de_Localidades ():
-    ListaTuplaEjemplo1 = [('JOSE DELGADO', 'SANTA ANA', '52', 'M', 'A'), ('CARMEN CORRALES', 'GOICOECHEA', '32', 'F', 'M'),('RAFAEL AGUERO', 'CENTRAL', '72', 'M', 'F'), ('MARTA VILLALTA', 'GOICOECHEA', '71', 'F', 'F')]
-    ListaTuplaEjemplo2 = [('JOSE DELGADO', 'SANTA ANA', '52', 'M', 'A'), ('CARMEN CORRALES', 'SANTA ANA', '32', 'F', 'M'),('RAFAEL AGUERO', 'SANTA ANA', '72', 'M', 'F')]
-    DiccionarioResultado1 = {"SANTA ANA":[("JOSE DELGADO","52","M","A")],"GOICOECHEA":[("CARMEN CORRALES","32","F","M"),("MARTA VILLALTA","71","F","F")],"CENTRAL":[("RAFAEL AGUERO","72","M","F")]}
-    DiccionarioResultado2 = {"SANTA ANA":[("JOSE DELGADO","52","M","A"),("CARMEN CORRALES","32","F","M"),("RAFAEL AGUERO","72","M","F")]}
+    EjemplosFile = open("Crear_Diccionario_de_LocalidadesEjemplos.txt","r")
+    ResultadosFile = open("Crear_Diccionario_de_LocalidadesResultados.txt","r")
+    LineasEjemplo = EjemplosFile.readlines()
+    LineasResultados = ResultadosFile.readlines()
+    EjemplosFile.close()
+    Resultados.close()
+    ListaTuplaEjemplo1 = eval(LineasEjemplo[0])
+    ListaTuplaEjemplo2 = eval(LineasEjemplo[1])
+    DiccionarioResultado1 = eval(LineasResultados[0])
+    DiccionarioResultado2 = eval(LineasResultados[1])
     assert Crear_Diccionario_de_Localidades(ListaTuplaEjemplo1) == DiccionarioResultado1
     assert Crear_Diccionario_de_Localidades(ListaTuplaEjemplo2) == DiccionarioResultado2
 
 def test_SepararPor ():
-    ListaEdadesEjemplo1 = [('JOSE DELGADO', '13', 'M', 'A'), ('CARMEN CORRALES','17', 'F', 'M'),('RAFAEL AGUERO','72', 'M', 'F')]
-    ListaEdadesEjemplo2 = [('JOSE DELGADO', '13', 'M', 'A'), ('CARMEN CORRALES','14', 'F', 'M'),('RAFAEL AGUERO','12', 'M', 'F')]
-    ListaGeneroInteresEjemplo1 = [('JOSE DELGADO', '13', 'M', 'F'), ('CARMEN CORRALES','14', 'F', 'M'),('RAFAEL AGUERO','12', 'M', 'M'),('MANUEL DELGADO', '66', 'M', 'A'), ('MARIA SALAS', '42', 'F', 'F'), ('ISABEL VEGA',  '73', 'F', 'A')]
-    ListaGeneroInteresEjemplo2 = [('JOSE DELGADO', '13', 'M', 'M'), ('CARMEN CORRALES','14', 'F', 'A'),('RAFAEL AGUERO','12', 'M', 'M'),('MANUEL DELGADO', '66', 'M', 'A'), ('MARIA SALAS', '42', 'F', 'F'), ('ISABEL VEGA',  '73', 'F', 'A')]
-    ListaDeEdadesEsperada1 = [[('JOSE DELGADO', '13', 'M', 'A')],[('CARMEN CORRALES','17', 'F', 'M')],[('RAFAEL AGUERO','72', 'M', 'F')]]
-    ListaDeEdadesEsperada2 = [[('JOSE DELGADO', '13', 'M', 'A'),('CARMEN CORRALES','14', 'F', 'M'),('RAFAEL AGUERO','12', 'M', 'F')],[],[]]
-    ListaGeneroInteresEsperada1 = [[('JOSE DELGADO', '13', 'M', 'F')],[('CARMEN CORRALES','14', 'F', 'M')],[('RAFAEL AGUERO','12', 'M', 'M')],[('MARIA SALAS', '42', 'F', 'F')],[('MANUEL DELGADO', '66', 'M', 'A')],[('ISABEL VEGA', '73', 'F', 'A')]]
-    ListaGeneroInteresEsperada2 = [[],[],[('JOSE DELGADO', '13', 'M', 'M'),('RAFAEL AGUERO','12', 'M', 'M')],[('MARIA SALAS', '42', 'F', 'F')],[('MANUEL DELGADO', '66', 'M', 'A')],[('CARMEN CORRALES','14', 'F', 'A'),('ISABEL VEGA', '73', 'F', 'A')]]
+    EjemplosFile = open("SepararPorEjemplos.txt","r")
+    ResultadosFile = open("SepararPorResultados.txt","r")
+    LineasEjemplo = EjemplosFile.readlines()
+    LineasResultados = ResultadosFile.readlines()
+    EjemplosFile.close()
+    Resultados.close()
+    ListaEdadesEjemplo1 = eval(LineasEjemplo[0])
+    ListaEdadesEjemplo2 = eval(LineasEjemplo[1])
+    ListaGeneroInteresEjemplo1 = eval(LineasEjemplo[2])
+    ListaGeneroInteresEjemplo2 = eval(LineasEjemplo[3])
+    ListaDeEdadesEsperada1 = eval(LineasResultados[0])
+    ListaDeEdadesEsperada2 = eval(LineasResultados[1])
+    ListaGeneroInteresEsperada1 = eval(LineasResultados[2])
+    ListaGeneroInteresEsperada2 = eval(LineasResultados[3])
     assert SepararPor(ListaEdadesEjemplo1,"Edad") == ListaDeEdadesEsperada1
     assert SepararPor(ListaEdadesEjemplo2,"Edad") == ListaDeEdadesEsperada2
     assert SepararPor(ListaGeneroInteresEjemplo1,"Genero") == ListaGeneroInteresEsperada1
     assert SepararPor(ListaGeneroInteresEjemplo2,"Genero") == ListaGeneroInteresEsperada2
 
 def test_Descartados ():
-    ListaPersonasEjemplo1 = [('JOSE DELGADO', 'SANTA ANA', '9', 'M', 'N'), ('CARMEN CORRALES', 'GOICOECHEA', '32', 'F', 'M'),('RAFAEL AGUERO', 'CENTRAL', '10', 'M', 'F'), ('MARTA VILLALTA', 'GOICOECHEA', '71', 'F', 'N')]
-    ListaPersonasEjemplo2 = [('JOSE DELGADO', 'SANTA ANA', '52', 'M', 'A'), ('CARMEN CORRALES', 'GOICOECHEA', '32', 'F', 'M')]
-    ListaDescartadosEsperada1 = [('JOSE DELGADO', 'SANTA ANA', '9', 'M', 'N'),('RAFAEL AGUERO', 'CENTRAL', '10', 'M', 'F')]
-    ListaDescartadosEsperada2 = []
-    ListaDescartadosEsperada3 = [('JOSE DELGADO', 'SANTA ANA', '9', 'M', 'N'),('MARTA VILLALTA', 'GOICOECHEA', '71', 'F', 'N')]
+    EjemplosFile = open("Pasar_a_TuplasEjemplo.txt","r")
+    ResultadosFile = open("Pasar_a_TuplasResultado.txt","r")
+    LineasEjemplo = EjemplosFile.readlines()
+    LineasResultados = ResultadosFile.readlines()
+    EjemplosFile.close()
+    Resultados.close()
+    ListaPersonasEjemplo1 = eval(LineasEjemplo[0])
+    ListaPersonasEjemplo2 = eval(LineasEjemplo[1])
+    ListaDescartadosEsperada1 = eval(LineasResultados[0])
+    ListaDescartadosEsperada2 = eval(LineasResultados[1])
     assert Descartados(ListaPersonasEjemplo1,"Menores") == ListaDescartadosEsperada1
-    assert Descartados(ListaPersonasEjemplo2,"Menores") == ListaDescartadosEsperada2
-    assert Descartados(ListaPersonasEjemplo1,"Asexuales") == ListaDescartadosEsperada3
-    assert Descartados(ListaPersonasEjemplo2,"Asexuales") == ListaDescartadosEsperada2
+    assert Descartados(ListaPersonasEjemplo2,"Menores") == []
+    assert Descartados(ListaPersonasEjemplo1,"Asexuales") == ListaDescartadosEsperada2
+    assert Descartados(ListaPersonasEjemplo2,"Asexuales") == []
 
 def test_Matching ():
+    EjemplosFile = open("MatchingEjemplos.txt","r")
+    ResultadosFile = open("MatchingResultados.txt","r")
+    LineasEjemplo = EjemplosFile.readlines()
+    LineasResultados = ResultadosFile.readlines()
+    EjemplosFile.close()
+    Resultados.close()
+    DiccionarioEjemplo1 = eval(LineasEjemplo[0])
+    DiccionarioEjemplo2 = eval(LineasEjemplo[1])
+    ListaResultado1 = eval(LineasResultado[0])
+    ListaResultado2 = eval(LineasResultado[1])
+
+    assert Matching(DiccionarioEjemplo1) == ListaResultado1
+    assert Matching(DiccionarioEjemplo2) == ListaResultado2
