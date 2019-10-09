@@ -10,15 +10,17 @@ def Pasar_a_Tupla(Lista):
     for [Nombre,Apellido,Localidad,Edad,Genero,Interes] in Lista:
         NuevaLista += [(Nombre.strip()+" "+Apellido.strip(),Localidad.strip(),Edad.strip(),Genero.strip(),Interes.strip())]
     return NuevaLista
-""" Toma una lista y una lista subconjunto de la primera, elimina de la primer lista todos los elementos de la segunda
+""" EliminarDeLaLista: List List
+    Toma una lista y una lista subconjunto de la primera, elimina de la primer lista todos los elementos de la segunda
     "difererencia de conjuntos".
     Utilizamos remove, el cual sirve para poder eliminar un objeto a seleccionar de una lista """
 def EliminarDeLaLista(ListaPrincipal,Lista_a_sacar):
     for Persona in Lista_a_sacar:
             ListaPrincipal.remove(Persona)#porque usamos remove 
 
-"""Toma una Lista de tuplas de personas, retorna un diccionario donde las keys son localidades y sus valores asociados una lista de
-    tuplas de personas que son residentes de la localidad"""
+"""Crear_Diccionario_de_Localidades: Lista(Tuplas) --> Dictionary
+   Toma una Lista de tuplas de personas, retorna un diccionario donde las keys son localidades y sus valores asociados una lista de
+   tuplas de personas que son residentes de la localidad"""
 def Crear_Diccionario_de_Localidades(ListaDePersonas):
     DiccionarioLocalidades = dict()
     for (NombreYApellido,Localidad,Edad,Genero,Interes) in ListaDePersonas:
@@ -27,7 +29,8 @@ def Crear_Diccionario_de_Localidades(ListaDePersonas):
         else:
             DiccionarioLocalidades[Localidad] = [(NombreYApellido,Edad,Genero,Interes)]
     return DiccionarioLocalidades
-""" Toma un archivo, una lista de tuplas de personas y la razon de por qué no formaron pareja.
+""" EscribirNoPareja: File List(Tuplas) String
+    Toma un archivo, una lista de tuplas de personas y la razon de por qué no formaron pareja.
     Escribe sobre el archivo todos los datos de las persona de la lista"""
 def EscribirNoPareja (Archivo_a_Escribir,ListaDePersonas,Razon):
     if Razon == "Menores":
@@ -41,7 +44,8 @@ def EscribirNoPareja (Archivo_a_Escribir,ListaDePersonas,Razon):
     for (NombreYApellido,Localidad,Edad,Genero,Interes) in ListaDePersonas:
         Archivo_a_Escribir.write("{0}, {1}, {2}, {3}, {4}\n".format(NombreYApellido,Edad,Genero,Interes,Localidad))#porque usamos esta funcion 
 
-""" Recibe el archivo a escribir, dos personas que formaran pareja y su localidad.
+""" EscribirParejas: File Tupla(Persona) Tupla(Persona) String
+    Recibe el archivo a escribir, dos personas que formaran pareja y su localidad.
     Escribe sobre el archivo la siguiente linea:
     NombreYApellido, Eddd, Genero, Interes -- NombreYApellido, Eddd, Genero, Interes -- Localidad"""
 def EscribirParejas (Archivo,Persona1,Persona2,Localidad):
@@ -93,7 +97,8 @@ def SepararPor (Lista, Dato):
         return [HombresHetero] + [MujeresHetero] + [HombresHomo] + [MujeresHomo] + [HombresBi] + [MujeresBi]
 
 """ Descartados: Lista(Tuplas) String --> Lista(Tuplas)
-    Recibe una lista de tuplas de personas y una condicion de descarte, devuelve una lista de tuplas de personas que cumplan con la condicion"""   
+    Recibe una lista de tuplas de personas y una condicion de descarte, si es la persona es menor de 10 años o si es asexual,
+    devuelve una lista de tuplas de personas que cumplan con la condicion"""   
 def Descartados (ListaDePersonas,Condicion):
     ListaDeTipo = []
     if Condicion == "Menores":
@@ -106,7 +111,8 @@ def Descartados (ListaDePersonas,Condicion):
             if Interes == "N":
                 ListaDeTipo += [(NombreYApellido,Localidad,Edad,Genero,Interes)]
         return ListaDeTipo
-""" Recibe un Archivo, dos listas de Genero e Interes y la localidad donde se encuentra.
+""" MatchearHeterosexuales: File List(Tuplas) List(Tuplas) String
+    Recibe un Archivo, dos listas de Genero e Interes y la localidad donde se encuentra.
     Empareja los primeros elementos de cada lista escribiendolos sobre el archivo y luego
     los elimina de las respectivas listas"""
 def MatchearHeterosexuales (Archivo,lista1,lista2,localidad):
@@ -114,7 +120,8 @@ def MatchearHeterosexuales (Archivo,lista1,lista2,localidad):
         EscribirParejas(Archivo,lista1[0],lista2[0],localidad)
         lista1.remove(lista1[0])
         lista2.remove(lista2[0])
-""" Recibe un archivo, una lista de Genero e Interes y la localidad donde se encuentra.
+""" MatchearHomosexuales: File List(Tuplas) String
+    Recibe un archivo, una lista de Genero e Interes y la localidad donde se encuentra.
     Empareja el primer elemento con el siguiente escribiendolos sobre el archivo y luego
     los elimina de la lista"""
 def MatchearHomosexuales (Archivo,lista, localidad):
@@ -122,7 +129,8 @@ def MatchearHomosexuales (Archivo,lista, localidad):
         EscribirParejas (Archivo,lista[0],lista[1],localidad)
         lista.remove(lista[0])
         lista.remove(lista[0])
-""" Recibe un diccionario de Localidades. Luego, por cada Localidad, separa por edades en 3 listas y a cada
+""" Matching: Dictionary -> List(List(Tuplas))
+    Recibe un diccionario de Localidades. Luego, por cada Localidad, separa por edades en 3 listas y a cada
     grupo etario en 6 listas de Genero e Interes. Despues, forma las parejas.
     Al mismo tiempo, forma una lista de dos listas donde la primera contiene todos los nombres de las personas
     que estan solas en su localidad y la otra, los nombres de las personas que no pudieron formar pareja.
