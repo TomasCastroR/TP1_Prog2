@@ -1,6 +1,11 @@
 """ Diseño de datos:
-    A cada persona y sus datos las representamos a traves de una quintupla del siguiente modo:
-    (NombreYApellido, Localidad, Edad, Genero, Interes) todos los datos son strings"""
+    Para representar a las personas usamos una tupla de 5 elementos de la siguiente forma:
+    (NombreYApellido,Localidad,Edad,Genero,Interes) donde todos los datos personal de cada persona
+    son representados a traves de un string
+    
+    Luego,las localidades y las personas que residen en ella, las representamos con un diccionario donde las keys seran las distintas
+    localidades y los valores asociados una lista de personas representadas por una tupla de 4 elementos que son sus datos en forma de string
+    (NombreYApellido,Edad,Genero,Interes)"""
 
 """ Pasar_a_tupla: Lista(Lista(Strings)) --> Lista(Tuplas)
     Recibe una lista de listas de strings, a cada lista de la lista la pasa a una tupla con sus strings
