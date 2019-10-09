@@ -93,6 +93,5 @@ def test_Matching ():
     DiccionarioEjemplo2 = eval(LineasEjemplo[1])
     ListaResultado1 = eval(LineasResultados[0])
     ListaResultado2 = eval(LineasResultados[1])
-
     assert Matching(DiccionarioEjemplo1) == ListaResultado1
     assert Matching(DiccionarioEjemplo2) == ListaResultado2

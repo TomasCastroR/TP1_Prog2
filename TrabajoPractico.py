@@ -4,17 +4,18 @@
 
 """ Pasar_a_tupla: Lista(Lista(Strings)) --> Lista(Tuplas)
     Recibe una lista de listas de strings, a cada lista de la lista la pasa a una tupla con sus strings
-    sin los espacios o caracteres inncesarios"""
+    sin los espacios o caracteres inncesarios, por eso utilizamos la funcion strip"""
 def Pasar_a_Tupla(Lista):
     NuevaLista = []
     for [Nombre,Apellido,Localidad,Edad,Genero,Interes] in Lista:
         NuevaLista += [(Nombre.strip()+" "+Apellido.strip(),Localidad.strip(),Edad.strip(),Genero.strip(),Interes.strip())]
     return NuevaLista
 """ Toma una lista y una lista subconjunto de la primera, elimina de la primer lista todos los elementos de la segunda
-    "difererencia de conjuntos" """
+    "difererencia de conjuntos".
+    Utilizamos remove, el cual sirve para poder eliminar un objeto a seleccionar de una lista """
 def EliminarDeLaLista(ListaPrincipal,Lista_a_sacar):
     for Persona in Lista_a_sacar:
-            ListaPrincipal.remove(Persona)
+            ListaPrincipal.remove(Persona)#porque usamos remove 
 
 """Toma una Lista de tuplas de personas, retorna un diccionario donde las keys son localidades y sus valores asociados una lista de
     tuplas de personas que son residentes de la localidad"""
@@ -38,7 +39,7 @@ def EscribirNoPareja (Archivo_a_Escribir,ListaDePersonas,Razon):
     elif Razon == "Unicos":
         Archivo_a_Escribir.write("Estas personas no pudieron formar pareja por ser las unicas en su localidad\n")
     for (NombreYApellido,Localidad,Edad,Genero,Interes) in ListaDePersonas:
-        Archivo_a_Escribir.write("{0}, {1}, {2}, {3}, {4}\n".format(NombreYApellido,Edad,Genero,Interes,Localidad))
+        Archivo_a_Escribir.write("{0}, {1}, {2}, {3}, {4}\n".format(NombreYApellido,Edad,Genero,Interes,Localidad))#porque usamos esta funcion 
 
 """ Recibe el archivo a escribir, dos personas que formaran pareja y su localidad.
     Escribe sobre el archivo la siguiente linea:
@@ -92,7 +93,7 @@ def SepararPor (Lista, Dato):
         return [HombresHetero] + [MujeresHetero] + [HombresHomo] + [MujeresHomo] + [HombresBi] + [MujeresBi]
 
 """ Descartados: Lista(Tuplas) String --> Lista(Tuplas)
-    Recibe una lista de tuplas de personas y una condicion de descarte, devuelve una lista de tuplas de personas que cumplan con la condicion"""    
+    Recibe una lista de tuplas de personas y una condicion de descarte, devuelve una lista de tuplas de personas que cumplan con la condicion"""   
 def Descartados (ListaDePersonas,Condicion):
     ListaDeTipo = []
     if Condicion == "Menores":
@@ -125,7 +126,7 @@ def MatchearHomosexuales (Archivo,lista, localidad):
     grupo etario en 6 listas de Genero e Interes. Despues, forma las parejas.
     Al mismo tiempo, forma una lista de dos listas donde la primera contiene todos los nombres de las personas
     que estan solas en su localidad y la otra, los nombres de las personas que no pudieron formar pareja.
-    Retorna esa lista"""
+    Retorna esa lista""" 
 def Matching(Diccionario):
     PersonasUnicas = []
     PersonasSolteras = []
@@ -158,7 +159,7 @@ def Matching(Diccionario):
 #FUNCION PRINCIPAL
 def Match ():
     EntradaFile = open("ejemplo1.txt","r",encoding="latin1")
-    Lista_de_Personas = Pasar_a_Tupla(list(map(lambda x: x.split(","),EntradaFile.readlines())))
+    Lista_de_Personas = Pasar_a_Tupla(list(map(lambda x: x.split(","),EntradaFile.readlines())))#justificar porque usamos esto
     EntradaFile.close()
     NoParejasFile = open("SalidaNoParejas.txt","w")
     Menores_de_Edad = Descartados(Lista_de_Personas,"Menores")
