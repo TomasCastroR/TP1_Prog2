@@ -16,7 +16,7 @@ def Pasar_a_Tupla(Lista):
     Utilizamos remove, el cual sirve para poder eliminar un objeto a seleccionar de una lista """
 def EliminarDeLaLista(ListaPrincipal,Lista_a_sacar):
     for Persona in Lista_a_sacar:
-            ListaPrincipal.remove(Persona)#porque usamos remove 
+            ListaPrincipal.remove(Persona) 
 
 """Crear_Diccionario_de_Localidades: Lista(Tuplas) --> Dictionary
    Toma una Lista de tuplas de personas, retorna un diccionario donde las keys son localidades y sus valores asociados una lista de
@@ -31,7 +31,8 @@ def Crear_Diccionario_de_Localidades(ListaDePersonas):
     return DiccionarioLocalidades
 """ EscribirNoPareja: File List(Tuplas) String
     Toma un archivo, una lista de tuplas de personas y la razon de por qué no formaron pareja.
-    Escribe sobre el archivo todos los datos de las persona de la lista"""
+    Escribe sobre el archivo todos los datos de las persona de la lista
+    Utilizamos format para que la funcion sea mas legible y amigable con la persona que vaya a leer el codigo"""
 def EscribirNoPareja (Archivo_a_Escribir,ListaDePersonas,Razon):
     if Razon == "Menores":
         Archivo_a_Escribir.write("Estas personas no formaron parejas por ser menores de 10 años\n")
@@ -42,7 +43,7 @@ def EscribirNoPareja (Archivo_a_Escribir,ListaDePersonas,Razon):
     elif Razon == "Unicos":
         Archivo_a_Escribir.write("Estas personas no pudieron formar pareja por ser las unicas en su localidad\n")
     for (NombreYApellido,Localidad,Edad,Genero,Interes) in ListaDePersonas:
-        Archivo_a_Escribir.write("{0}, {1}, {2}, {3}, {4}\n".format(NombreYApellido,Edad,Genero,Interes,Localidad))#porque usamos esta funcion 
+        Archivo_a_Escribir.write("{0}, {1}, {2}, {3}, {4}\n".format(NombreYApellido,Edad,Genero,Interes,Localidad))
 
 """ EscribirParejas: File Tupla(Persona) Tupla(Persona) String
     Recibe el archivo a escribir, dos personas que formaran pareja y su localidad.
@@ -165,9 +166,11 @@ def Matching(Diccionario):
     return [PersonasUnicas] + [PersonasSolteras]
                 
 #FUNCION PRINCIPAL
+"""dado que en el archivo de entrada, cada linea representa los datos de una persona, los mismos estan separados por una coma, y al leer el archivo se obtiene un string de la linea entera,
+para obtener una lista de sus datos aislados en forma de string, utilizamos la funcion split(,) para que los separe"""
 def Match ():
     EntradaFile = open("ejemplo1.txt","r",encoding="latin1")
-    Lista_de_Personas = Pasar_a_Tupla(list(map(lambda x: x.split(","),EntradaFile.readlines())))#justificar porque usamos esto
+    Lista_de_Personas = Pasar_a_Tupla(list(map(lambda x: x.split(","),EntradaFile.readlines())))
     EntradaFile.close()
     NoParejasFile = open("SalidaNoParejas.txt","w")
     Menores_de_Edad = Descartados(Lista_de_Personas,"Menores")
@@ -181,5 +184,4 @@ def Match ():
     EscribirNoPareja(NoParejasFile,NoParejas[0],"Unicos")
     EscribirNoPareja(NoParejasFile,NoParejas[1],"Solteros")
     NoParejasFile.close()
-
 Match()
