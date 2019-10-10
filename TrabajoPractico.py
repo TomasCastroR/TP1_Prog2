@@ -174,8 +174,9 @@ def Matching(Diccionario):
 """dado que en el archivo de entrada, cada linea representa los datos de una persona, los mismos estan separados por una coma, y al leer el archivo se obtiene un string de la linea entera,
 para obtener una lista de sus datos aislados en forma de string, utilizamos la funcion split(,) para que los separe"""
 def Match ():
-    EntradaFile = open("ejemplo1.txt","r",encoding="latin1")
-    Lista_de_Personas = Pasar_a_Tupla(list(map(lambda x: x.split(","),EntradaFile.readlines())))
+    NombreArchivo = input("Ingrese el nombre del archivo de personas a usar en este programa: ")
+    EntradaFile = open(NombreArchivo,"r")
+    Lista_de_Personas = Pasar_a_Tupla(list(map(lambda cadena: cadena.split(","),EntradaFile.readlines())))
     EntradaFile.close()
     NoParejasFile = open("SalidaNoParejas.txt","w")
     Menores_de_Edad = Descartados(Lista_de_Personas,"Menores")
