@@ -78,7 +78,7 @@ def SepararPor (Lista, Dato):
                 Personas_15_y_17 += [Persona]
             else:
                 Personas_18_mas += [Persona]
-        return [Personas_11_y_14] + [Personas_15_y_17] + [Personas_18_mas]
+        ListaFinal = [Personas_11_y_14] + [Personas_15_y_17] + [Personas_18_mas]
     
     elif Dato == "Genero":
         HombresHetero = []
@@ -100,7 +100,8 @@ def SepararPor (Lista, Dato):
                 HombresBi += [Persona]
             elif Persona[2] == "F" and Persona[3] == "A":
                 MujeresBi += [Persona]
-        return [HombresHetero] + [MujeresHetero] + [HombresHomo] + [MujeresHomo] + [HombresBi] + [MujeresBi]
+        ListaFinal = [HombresHetero] + [MujeresHetero] + [HombresHomo] + [MujeresHomo] + [HombresBi] + [MujeresBi]
+    return ListaFinal
 
 """ Descartados: Lista(Tuplas) String --> Lista(Tuplas)
     Recibe una lista de tuplas de personas y una condicion de descarte, si es la persona es menor de 10 años o si es asexual,
@@ -111,12 +112,12 @@ def Descartados (ListaDePersonas,Condicion):
         for (NombreYApellido,Localidad,Edad,Genero,Interes) in ListaDePersonas:      
             if int(Edad) <= 10:
                 ListaDeTipo += [(NombreYApellido,Localidad,Edad,Genero,Interes)]
-        return ListaDeTipo
+
     elif Condicion == "Asexuales":
         for (NombreYApellido,Localidad,Edad,Genero,Interes) in ListaDePersonas:
             if Interes == "N":
                 ListaDeTipo += [(NombreYApellido,Localidad,Edad,Genero,Interes)]
-        return ListaDeTipo
+    return ListaDeTipo
 """ MatchearHeterosexuales: File List(Tuplas) List(Tuplas) String
     Recibe un Archivo, dos listas de Genero e Interes y la localidad donde se encuentra.
     Empareja los primeros elementos de cada lista escribiendolos sobre el archivo y luego
